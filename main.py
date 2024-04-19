@@ -45,6 +45,7 @@ def verify_order_id(order_id):
 
 @bot.event
 async def on_message(message):
+    print(message)
     if str(message.channel.type) == "private" and message.author != bot.user:
         text_message = message.content
 
@@ -52,11 +53,11 @@ async def on_message(message):
         if code_exist:
             await message.author.send("Verification Code has already been used")
         else:
-
             if verify_order_id(text_message):
                 Verification_codes.insert_one({"user_id":  str(message.author.id), "code": text_message})
                 guild = await bot.fetch_guild(int(server_id))
                 member = await guild.fetch_member(message.author.id)
+
                 role = discord.utils.get(guild.roles, name="premium")
                 await member.add_roles(role)
                 await message.author.send("You've been verified!")
