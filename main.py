@@ -25,8 +25,7 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    print("A new member just joined the Channel")
-    await member.send(TOKEN_PROMPT_MESSAGE)
+    print("A new member just joined the Channel", member)
 
 
 def verify_order_id(order_id):
