@@ -9,3 +9,4 @@ conn = MongoClient(DB_URL)
 db = conn.get_database("Main")
 
 Verification_codes = db.get_collection("verification_codes")
+Settings = db.get_collection("setting")
