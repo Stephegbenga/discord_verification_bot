@@ -32,8 +32,8 @@ async def on_ready():
 @bot.event
 async def on_member_join(member):
     try:
-        await member.send(welcome_message)
-
+        print("A member just joined the channel", member)
+        # await member.send(welcome_message)
     except Exception as e:
         print("Something went wrong", e)
 
