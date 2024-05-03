@@ -33,7 +33,7 @@ async def on_ready():
 async def on_member_join(member):
     try:
         print("A member just joined the channel", member)
-        # await member.send(welcome_message)
+        await member.send(welcome_message)
     except Exception as e:
         print("Something went wrong", e)
 
