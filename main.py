@@ -14,14 +14,15 @@ TOKEN_PROMPT_MESSAGE = "Welcome to the server! Please provide a token to gain ac
 intents = discord.Intents(messages=True, message_content=True, members=True)
 
 bot = commands.Bot(command_prefix='/', intents=intents, help_command=None)
+
 server_id = os.getenv("server_id")
+premium_role_name = os.getenv("premium_role_name")
+
 welcome_message = "Hello and welcome! I’m here to get you started. 🚀 To unlock full access to the TVT Community, please send me your personal code right here."
 used_code_message = "Oops! This code has already been used. 😕 Please check your details and try again, or contact support for assistance."
 success_message = "Verification complete! 🌟 You now have full access. Check out the channels to dive into all the resources and start connecting with fellow traders. Happy trading!"
 invalid_code_message = "Hmm, that code doesn’t seem to be valid. 🤔 Please double-check your code and try again, or reach out to support for help."
 already_verified_message = "You're already verified! 🎉 No further action is needed. Feel free to explore the channels and engage with the community. Happy trading!"
-
-
 
 
 @bot.event
@@ -74,7 +75,7 @@ async def on_message(message):
                 Verification_codes.insert_one({"user_id":  str(message.author.id), "code": text_message})
                 guild = await bot.fetch_guild(int(server_id))
                 member = await guild.fetch_member(message.author.id)
-                role = discord.utils.get(guild.roles, name="premium")
+                role = discord.utils.get(guild.roles, name=premium_role_name)
                 if role in member.roles:
                     await message.author.send(setting['already_verified_message'])
                     return
